@@ -1,0 +1,6 @@
+create Address street="Pz"
+create Address street="Samaru"
+all Address
+
+create Restaurant name="Freezlers" user_id="0001" logo_url="https://www.google.com/url?sa=i&url=https%3A%2F%2Fsimilarpng.com%2Frestaurant-logo-with-chef-drawing-template-on-transparent-background-png%2F&psig=AOvVaw0M4eIEj1LfVgRKFb31sccj&ust=1692430517263000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCODH-o_Z5YADFQAAAAAdAAAAABAE" contact_phone="08108310900" min_order_cost=3 delivery_cost=21 is_active=True
+all Restaurant
