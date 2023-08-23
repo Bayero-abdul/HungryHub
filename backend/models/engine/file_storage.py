@@ -5,6 +5,30 @@ instances to a JSON file and deserializes JSON file to instances.
 
 import json
 import os.path
+import models
+from models.base_model import BaseModel
+from models.user import User
+from models.restaurant import Restaurant
+from models.address import Address
+from models.food import Food
+from models.order import Order
+from models.cart import Cart
+from models.cart import CartItem
+from models.rating import Rating
+from models.payment import Payment
+
+
+classes = {'BaseModel': BaseModel,
+           'User': User,
+           'Restaurant': Restaurant,
+           'Address': Address,
+           'Food': Food,
+           'Order': Order,
+           'Cart': Cart,
+           'CartItem': CartItem,
+           'Payment': Payment,
+           'Rating': Rating
+}
 
 
 class FileStorage:
@@ -40,17 +64,6 @@ JSON file to instances."""
 
     def reload(self):
         """deserializes the JSON file to __objects"""
-        from models.base_model import BaseModel
-        from models.user import User
-        from models.restaurant import Restaurant
-        from models.address import Address
-        from models.food import Food
-        from models.order import Order
-        from models.cart import Cart
-        from models.cart import CartItem
-        from models.rating import Rating
-        from models.payment import Payment
-
         if os.path.exists(self.__file_path):
             with open(type(self).__file_path, "r", encoding="utf-8") as f:
                 read = json.loads(f.read())
