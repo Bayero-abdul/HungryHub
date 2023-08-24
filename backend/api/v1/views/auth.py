@@ -8,6 +8,7 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
 
+
 # Create a route to authenticate your users and return JWTs. The
 # create_access_token() function is used to actually generate the JWT.
 @app_views.route("/login", methods=["POST"])
@@ -19,3 +20,12 @@ def login():
 
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
+
+
+@app_views.route("/refresh", methods=["POST"])
+@jwt_required()
+def refresh_token():
+    print("Refreshing token for user:", get_jwt_identity())
+    current_user = get_jwt_identity()
+    access_token = create_access_token(identity=current_user)
+    return jsonify(access_token=access_token), 200
