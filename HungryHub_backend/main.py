@@ -4,6 +4,7 @@ from flask_restx import Api
 from models.users import Users, db
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 from api.authentication import auth
 from api.users import user_ns
 from api.address import address_ns
@@ -19,6 +20,8 @@ def create_app(config):
     app.config.from_object(config)
     # initialize the app with the extension
     db.init_app(app)
+
+    CORS(app)
     
 
     # Initialize migration
