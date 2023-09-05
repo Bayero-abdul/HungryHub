@@ -3,10 +3,10 @@ from flask_restx import Resource, Namespace, fields
 from models.users import Users
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required
-from api.users import user_ns 
 
 
-auth = Namespace("auth", description = "user authentication")
+
+auth = Namespace("Auth", description = "user authentication")
 
 
 
@@ -69,7 +69,7 @@ class Signup(Resource):
 class Login(Resource):
     @auth.expect(login_model)
     def post(self):
-        data = request.get_json() #api.payload is used in accessing parsed JSON data
+        data = request.get_json() 
 
         username = data.get('username')
         password = data.get('password')

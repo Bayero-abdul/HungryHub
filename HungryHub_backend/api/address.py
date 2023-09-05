@@ -6,7 +6,7 @@ from models.base_model import db
 
 
 
-address_ns = Namespace("address", description="CRUD operations for addresses")
+address_ns = Namespace("Address", description="CRUD operations for addresses")
 
 # Define a model for serialization/deserialization
 address_model = address_ns.model("Address", {
@@ -19,7 +19,8 @@ address_model = address_ns.model("Address", {
     'country': fields.String(required=True, description='The country'),
 })
 
-@address_ns.route('/<int:id>')
+#define CRUD operations for address endpoint
+@address_ns.route('/address/<int:id>')
 @address_ns.param('id', 'The unique identifier of an address')
 class AddressResource(Resource):
     @address_ns.marshal_with(address_model)
@@ -67,7 +68,7 @@ class AddressResource(Resource):
         db.session.commit()
         return {'message': 'Address deleted'}, 204
 
-@address_ns.route('/')
+@address_ns.route('/address/')
 class AddressListResource(Resource):
     @address_ns.marshal_list_with(address_model)
     def get(self):
