@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token, create_refresh_token, jwt_re
 
 
 
-auth = Namespace("Auth", description = "user authentication")
+auth = Namespace("")
 
 
 
@@ -40,7 +40,7 @@ login_model = auth.model(
 
 
 
-@auth.route("/signup")
+@auth.route("/api/signup")
 class Signup(Resource):
     @auth.marshal_with(signup_model)
     @auth.expect(signup_model)
@@ -65,7 +65,7 @@ class Signup(Resource):
 
 
     
-@auth.route("/login")
+@auth.route("/api/login")
 class Login(Resource):
     @auth.expect(login_model)
     def post(self):

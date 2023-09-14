@@ -32,8 +32,10 @@ app.config.from_object("config.DevelopmentConfig")
 # Initialize the app with the extension
 db.init_app(app)
 
-# Enable CORS
-CORS(app)
+
+#This code configures CORS to allow requests from  http://localhost:3000 
+#to any route matching /api/* on the Flask server.
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
 # Initialize migration
 migrate = Migrate(app, db)
@@ -42,7 +44,7 @@ migrate = Migrate(app, db)
 JWTManager(app)
 
 # Initialize API
-api = Api(app, doc='/docs')
+api = Api(app, doc='/swagger', description="Api Endpoints")
 
 api.add_namespace(auth)
 api.add_namespace(user_ns)

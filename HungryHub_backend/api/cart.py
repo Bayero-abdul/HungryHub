@@ -5,7 +5,7 @@ from models.cartitem import CartItem
 from models.orders import Orders
 from models.base_model import db
 
-cart_ns = Namespace("Carts", description="CRUD operations for carts")
+cart_ns = Namespace("", description="CRUD operations for carts")
 
 # Define a cart model for input and output serialization
 cart_model = cart_ns.model("Cart", {
@@ -32,7 +32,7 @@ checkout_model = cart_ns.model("Checkout", {
 
 
 #defining cart CRUD operation
-@cart_ns.route('/carts/')
+@cart_ns.route('/api/carts/')
 class CartsResource(Resource):
     @cart_ns.doc(responses={200: 'OK'})
     @cart_ns.marshal_list_with(cart_model)
@@ -52,7 +52,7 @@ class CartsResource(Resource):
         db.session.commit()
         return cart, 201
 
-@cart_ns.route('/carts/<int:id>/')
+@cart_ns.route('/api/carts/<int:id>/')
 class CartResource(Resource):
     @cart_ns.doc(responses={200: 'OK', 404: 'Cart not found'}, params={'id': 'Specify the Cart ID'})
     @cart_ns.marshal_with(cart_model)
@@ -82,7 +82,7 @@ class CartResource(Resource):
         return cart
 
 
-@cart_ns.route('/carts/<int:id>/items/')
+@cart_ns.route('/api/carts/<int:id>/items/')
 class CartItemsResource(Resource):
     @cart_ns.doc(responses={200: 'OK', 404: 'Cart not found'}, params={'id': 'Specify the Cart ID'})
     @cart_ns.marshal_list_with(cart_item_model)
@@ -134,7 +134,7 @@ def create_order(cart, total_price, payment_method):
 
 
 # Implementing the checkout logic 
-@cart_ns.route('/carts/<int:id>/checkout/')
+@cart_ns.route('/api/carts/<int:id>/checkout/')
 class CartCheckoutResource(Resource):
     @cart_ns.doc(responses={200: 'Checkout successful', 400: 'Invalid input'}, params={'id': 'Specify the Cart ID'})
     @cart_ns.expect(checkout_model)

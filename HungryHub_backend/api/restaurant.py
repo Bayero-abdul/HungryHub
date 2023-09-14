@@ -7,7 +7,7 @@ from models.base_model import db
 
 
 
-restaurant_ns = Namespace("Restaurant", description="CRUD operations for restaurants")
+restaurant_ns = Namespace("", description="CRUD operations for restaurants")
 
 
 
@@ -36,8 +36,8 @@ restaurant_rating_model = restaurant_ns.model("Rating", {
 
 
 
-#defining CRUD operation for restaurants
-@restaurant_ns.route('/restaurant/<int:id>/')
+#Implementing CRUD operation for restaurants
+@restaurant_ns.route('/api/restaurant/<int:id>/')
 class RestaurantResource(Resource):
     @restaurant_ns.doc(responses={200: 'OK', 404: 'Restaurant not found'}, params={'id': 'Specify the Restaurant ID'})
     @restaurant_ns.marshal_with(restaurant_model)
@@ -92,7 +92,7 @@ class RestaurantResource(Resource):
         db.session.commit()
         return {'message': 'Restaurant updated'}, 200
 
-@restaurant_ns.route('/restaurant/')
+@restaurant_ns.route('/api/restaurant/')
 class RestaurantsResource(Resource):
     @restaurant_ns.doc(responses={200: 'OK'})
     @restaurant_ns.marshal_list_with(restaurant_model)
@@ -102,7 +102,7 @@ class RestaurantsResource(Resource):
         return restaurants
     
     
-@restaurant_ns.route('/restaurant/<int:id>/products/')
+@restaurant_ns.route('/api/restaurant/<int:id>/products/')
 class RestaurantFoodsResource(Resource):
     @restaurant_ns.marshal_list_with(restauarant_food_model)
     def get(self, id):
@@ -110,7 +110,7 @@ class RestaurantFoodsResource(Resource):
         product = Product.query.filter_by(restaurant_id=id).all()
         return product
 
-@restaurant_ns.route('/restaurant/<int:id>/ratings/')
+@restaurant_ns.route('/api/restaurant/<int:id>/ratings/')
 class RestaurantRatingsResource(Resource):
     @restaurant_ns.marshal_list_with(restaurant_rating_model)
     def get(self, id):
@@ -118,7 +118,7 @@ class RestaurantRatingsResource(Resource):
         ratings = Rating.query.filter_by(restaurant_id=id).all()
         return ratings
 
-@restaurant_ns.route('/restaurants/nearby')
+@restaurant_ns.route('/api/restaurants/nearby')
 class NearbyRestaurantsResource(Resource):
     @restaurant_ns.doc(params={'lat': 'Latitude', 'lon': 'Longitude'})
     @restaurant_ns.marshal_list_with(restaurant_model)

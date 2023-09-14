@@ -5,7 +5,7 @@ from models.product import Product
 from models.base_model import db
 from sqlalchemy import func
 
-ratings_ns = Namespace("Ratings", description="CRUD operations for ratings")
+ratings_ns = Namespace("", description="CRUD operations for ratings")
 
 # Define a rating model for input and output serialization
 rating_model = ratings_ns.model("Rating", {
@@ -17,7 +17,7 @@ rating_model = ratings_ns.model("Rating", {
 
 
 # Implementing ratings CRUD operations
-@ratings_ns.route('/ratings/')
+@ratings_ns.route('/api/ratings/')
 class RatingsResource(Resource):
     @ratings_ns.doc(responses={200: 'OK'})
     @ratings_ns.marshal_list_with(rating_model)
@@ -41,7 +41,7 @@ class RatingsResource(Resource):
         db.session.commit()
         return rating, 201
 
-@ratings_ns.route('/ratings/<int:id>/')
+@ratings_ns.route('/api/ratings/<int:id>/')
 class RatingResource(Resource):
     @ratings_ns.doc(responses={200: 'OK', 404: 'Rating not found'}, params={'id': 'Specify the Rating ID'})
     @ratings_ns.marshal_with(rating_model)
@@ -72,7 +72,7 @@ class RatingResource(Resource):
         return rating
 
 
-@ratings_ns.route('/ratings/avg/<int:product_id>/')
+@ratings_ns.route('/api/ratings/avg/<int:product_id>/')
 class AverageRatingResource(Resource):
     @ratings_ns.doc(responses={200: 'OK', 404: 'Product not found'}, params={'product_id': 'Specify the Product ID'})
     def get(self, product_id):

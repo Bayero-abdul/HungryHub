@@ -3,7 +3,7 @@ from flask_restx import Resource, Namespace, fields
 from models.payment import Payment
 from models.base_model import db
 
-payment_ns = Namespace("Payment", description="CRUD operations for payment")
+payment_ns = Namespace("", description="CRUD operations for payment")
 
 # Define a payment model for input and output serialization
 payment_model = payment_ns.model('Payment', {
@@ -16,7 +16,7 @@ payment_model = payment_ns.model('Payment', {
 
 
 #defining CRUD operations for payment
-@payment_ns.route('/payments/')
+@payment_ns.route('/api/payments/')
 class PaymentsListResource(Resource):
     @payment_ns.marshal_list_with(payment_model)
     def get(self):
@@ -38,7 +38,7 @@ class PaymentsListResource(Resource):
         db.session.commit()
         return payment, 201
 
-@payment_ns.route('/payment/<int:id>')
+@payment_ns.route('/api/payment/<int:id>')
 class PaymentResource(Resource):
     @payment_ns.marshal_with(payment_model)
     def get(self, id):

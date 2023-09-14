@@ -4,7 +4,7 @@ from models.users import Users
 from models.orders import Orders
 from werkzeug.security import generate_password_hash
 
-user_ns = Namespace("Users", description="User and Order operations")
+user_ns = Namespace("", description="User and Order operations")
 
 # Define models for User and Order
 user_model = user_ns.model(
@@ -29,7 +29,7 @@ order_model = user_ns.model(
 
 
 # Users CRUD operations
-@user_ns.route("/users")
+@user_ns.route("/api/users")
 class UsersList(Resource):
     @user_ns.doc("list_users")
     @user_ns.marshal_list_with(user_model)
@@ -64,7 +64,7 @@ class UsersList(Resource):
 
         return new_user, 201
 
-@user_ns.route("/users/<int:id>")
+@user_ns.route("/api/users/<int:id>")
 @user_ns.doc(params={"id": "User ID"})
 class UserDetail(Resource):
     @user_ns.doc("get_user")
@@ -110,7 +110,7 @@ class UserDetail(Resource):
     
 
 # Orders CRUD operations
-@user_ns.route("/users/<int:id>/orders")
+@user_ns.route("/api/users/<int:id>/orders")
 @user_ns.doc(params={"id": "User ID"})
 class UserOrders(Resource):
     @user_ns.doc("get_user_orders")

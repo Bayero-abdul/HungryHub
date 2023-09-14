@@ -4,7 +4,7 @@ from models.product import Product
 from models.ratings import Rating
 from models.base_model import db
 
-product_ns = Namespace("Products", description="CRUD operations for products")
+product_ns = Namespace("", description="CRUD operations for products")
 
 # Define a product model for input and output serialization
 product_model = product_ns.model('Product', {
@@ -22,7 +22,7 @@ product_rating_model = product_ns.model('Rating', {
 
 
 #defining product CRUD operation
-@product_ns.route('/products/')
+@product_ns.route('/api/products/')
 class FoodsListResource(Resource):
     @product_ns.marshal_list_with(product_model)
     def get(self):
@@ -44,7 +44,7 @@ class FoodsListResource(Resource):
         db.session.commit()
         return product, 201
 
-@product_ns.route('/product/<int:id>/')
+@product_ns.route('/api/product/<int:id>/')
 class FoodResource(Resource):
     @product_ns.marshal_with(product_model)
     def get(self, id):
@@ -76,7 +76,7 @@ class FoodResource(Resource):
         db.session.commit()
         return '', 204  
 
-@product_ns.route('/product/<int:id>/ratings/')
+@product_ns.route('/api/product/<int:id>/ratings/')
 class FoodRatingsResource(Resource):
     @product_ns.marshal_list_with(product_rating_model)
     def get(self, id):

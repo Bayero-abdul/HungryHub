@@ -3,7 +3,7 @@ from flask_restx import Resource, Namespace, fields
 from models.orders import Orders
 from models.base_model import db
 
-orders_ns = Namespace("Orders", description="CRUD operations for orders")
+orders_ns = Namespace("", description="CRUD operations for orders")
 
 # Define an order model for input and output serialization
 order_model = orders_ns.model("Order", {
@@ -40,7 +40,7 @@ order_fulfillment_model = orders_ns.model("OrderFulfillment", {
 
 
 # Implementing orders CRUD operations
-@orders_ns.route('/orders/')
+@orders_ns.route('/api/orders/')
 class OrdersResource(Resource):
     @orders_ns.doc(responses={200: 'OK'})
     @orders_ns.marshal_list_with(order_model)
@@ -63,7 +63,7 @@ class OrdersResource(Resource):
         db.session.commit()
         return order, 201
 
-@orders_ns.route('/orders/<int:id>/')
+@orders_ns.route('/api/orders/<int:id>/')
 class OrderResource(Resource):
     @orders_ns.doc(responses={200: 'OK', 404: 'Order not found'}, params={'id': 'Specify the Order ID'})
     @orders_ns.marshal_with(order_model)
@@ -95,7 +95,7 @@ class OrderResource(Resource):
         return order
 
 
-@orders_ns.route('/orders/<int:id>/items/')
+@orders_ns.route('/api/orders/<int:id>/items/')
 class OrderItemsResource(Resource):
     @orders_ns.doc(responses={200: 'OK', 404: 'Order not found'}, params={'id': 'Specify the Order ID'})
     @orders_ns.marshal_list_with(order_item_model)
@@ -105,7 +105,7 @@ class OrderItemsResource(Resource):
         return order_items
     
 # Define a route for order cancellation
-@orders_ns.route('/orders/<int:id>/cancel/')
+@orders_ns.route('/api/orders/<int:id>/cancel/')
 class OrderCancelResource(Resource):
     @orders_ns.doc(responses={200: 'Order cancelled', 400: 'Invalid input'}, params={'id': 'Specify the Order ID'})
     @orders_ns.expect(order_cancellation_model)
@@ -124,7 +124,7 @@ class OrderCancelResource(Resource):
 
 
 # Define a route for order fulfillment
-@orders_ns.route('/orders/<int:id>/fulfill/')
+@orders_ns.route('/api/orders/<int:id>/fulfill/')
 class OrderFulfillResource(Resource):
     @orders_ns.doc(responses={200: 'Order fulfilled', 400: 'Invalid input'}, params={'id': 'Specify the Order ID'})
     @orders_ns.expect(order_fulfillment_model)

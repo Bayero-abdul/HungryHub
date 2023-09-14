@@ -3,7 +3,7 @@ from flask_restx import Resource, Namespace, fields
 from models.cartitem import CartItem
 from models.base_model import db
 
-cartitem_ns = Namespace("Cart Items", description="CRUD operations for cart items")
+cartitem_ns = Namespace("", description="CRUD operations for cart items")
 
 # Define a cart item model for input and output serialization
 cartitem_model = cartitem_ns.model("Cart_Item", {
@@ -15,7 +15,7 @@ cartitem_model = cartitem_ns.model("Cart_Item", {
 
 
 #defining cart items CRUD operations
-@cartitem_ns.route('/cart_items/')
+@cartitem_ns.route('/api/cart_items/')
 class CartItemsResource(Resource):
     @cartitem_ns.doc(responses={200: 'OK'})
     @cartitem_ns.marshal_list_with(cartitem_model)
@@ -39,7 +39,7 @@ class CartItemsResource(Resource):
         db.session.commit()
         return cartitem, 201
 
-@cartitem_ns.route('/cart_items/<int:id>/')
+@cartitem_ns.route('/api/cart_items/<int:id>/')
 class CartItemResource(Resource):
     @cartitem_ns.doc(responses={200: 'OK', 404: 'Cart item not found'}, params={'id': 'Specify the Cart Item ID'})
     @cartitem_ns.marshal_with(cartitem_model)
