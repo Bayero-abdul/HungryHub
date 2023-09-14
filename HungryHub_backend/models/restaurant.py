@@ -14,7 +14,7 @@ class Restaurant(BaseModel):
     address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'), nullable=False)
 
      # Define a relationship between Restaurant and Address
-    address = db.relationship('Address', backref='restaurant')
+    address = db.relationship('Address', backref='restaurant', foreign_keys=[address_id])
 
     def __init__(self, name, description, address_id):
         self.name = name
