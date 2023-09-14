@@ -13,11 +13,12 @@ class Rating(BaseModel):
     rating = db.Column(db.Float, nullable=False)
 
     # Define a relationship between Rating and User
-    user = db.relationship('User', backref='ratings')
+    user = db.relationship('Users', backref='ratings')
 
     # Define a relationship between Rating and Product
-    product = db.relationship('Product', backref='ratings')  # Corrected relationship name
+    product = db.relationship('Product', backref='ratings')  
 
+    
     def __init__(self, user_id, product_id, rating):
         self.user_id = user_id
         self.product_id = product_id

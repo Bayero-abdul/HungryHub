@@ -15,7 +15,7 @@ class Orders(BaseModel):
     is_fulfilled = db.Column(db.Boolean, default=False)
 
     # Define a relationship between Order and User
-    user = db.relationship('User', backref='orders')
+    user = db.relationship('Users', backref='orders')
 
     # Define a relationship between Order and Cart
     cart = db.relationship('Cart', backref='order')

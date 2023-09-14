@@ -18,10 +18,10 @@ class Payment(BaseModel):
     payment_status = db.Column(db.String(50), nullable=False)
 
     # Define a relationship between Payment and User
-    user = db.relationship('User', backref='payments')
+    user = db.relationship('Users', backref='payments')
 
     # Define a relationship between Payment and Order
-    order = db.relationship('Order', backref='payments')
+    order = db.relationship('Orders', backref='payments')
 
     def __init__(self, user_id, order_id, amount, payment_status):
         self.user_id = user_id

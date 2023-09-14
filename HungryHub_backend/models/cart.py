@@ -12,7 +12,7 @@ class Cart(BaseModel):
     is_checked_out = db.Column(db.Boolean, default=False)
 
     # Define a relationship between Cart and User
-    user = db.relationship('User', backref='carts')
+    user = db.relationship('Users', backref='carts')
 
     def __init__(self, user_id):
         self.user_id = user_id
