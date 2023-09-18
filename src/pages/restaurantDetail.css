@@ -1,0 +1,103 @@
+.restaurant-detail .header {
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center; /* Horizontally center the content */
+  align-items: flex-end; /* Push content to the bottom */
+  padding-bottom: 16px;
+}
+
+.rest-name {
+  text-align: end;
+  color: white;
+}
+
+.restaurant-detail .menu-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(346px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.menu-item {
+  position: relative;
+  border: 1px solid white;
+  width: 346px; /* width of the card */
+  height: 286px; /* total height */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+  overflow: hidden;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+
+.menu-item-image {
+  height: 210px;
+  width: 100%; /* occupy full width */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+}
+
+.add-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.menu-item-details {
+  position: absolute;
+  bottom: 0;
+  width: 100%; /* full width */
+  height: 121px;
+  padding: 8px;
+  background-color: white;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+.description-price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-item h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.menu-item p {
+  margin: 0;
+}
+
+.food {
+  padding-left: 30px;
+  text-align: left;
+}
+
+.placeholder-header {
+  background-color: #e0e0e0; /* Light gray background */
+}
+
+.placeholder-menu-item {
+  background-color: #f5f5f5; /* Even lighter gray background for contrast */
+  margin: 1rem 0;
+}
+
+.placeholder-image {
+  width: 100%;
+  height: 200px;
+  background-color: #e0e0e0; /* Light gray background */
+}
