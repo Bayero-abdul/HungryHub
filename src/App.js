@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import "./App.css";
-import RestaurantDetail from "./pages/restaurantDetail";
+import RestaurantDetail from "./pages/RestaurantDetail/RestaurantDetail";
 import AccountPage from "./pages/accountPage/accountPage";
 
 function App() {
